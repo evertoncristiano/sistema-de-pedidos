@@ -1,11 +1,12 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { CreateOrderDto } from './create-order.dto';
+import { CreateOrderDto, OrderItemDto } from './create-order.dto';
 import { Repository } from 'typeorm';
 import { Order } from './order.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { OrderItem } from './order-item.entity';
 import { UpdateOrderDto } from './update-order.dto';
 import { Customer } from 'src/customers/customer.entity';
+import { Product } from './product.entity';
 
 @Injectable()
 export class OrdersService {
@@ -13,15 +14,18 @@ export class OrdersService {
   constructor(
     @InjectRepository(Order) private readonly ordersRepository: Repository<Order>,
     @InjectRepository(OrderItem) private readonly orderItemsRepository: Repository<OrderItem>,
-    @InjectRepository(Customer) private readonly customersRepository: Repository<Customer>
+    @InjectRepository(Customer) private readonly customersRepository: Repository<Customer>,
+    @InjectRepository(Product) private readonly productsRepository: Repository<Product>
   ) {
   }
 
-  async findOne(id: number): Promise<Order> {
+  async findOne(id: string): Promise<Order> {
     return this.ordersRepository.findOne({
       where: { id },
       relations: {
-        items: true,
+        items: { 
+          product: true 
+        },
         customer: true
       }
     })
@@ -32,7 +36,6 @@ export class OrdersService {
     const { customerId, street, number, district, city, state, country, items} = input
     
     const customer = await this.customersRepository.findOneBy({ id: customerId })
-
     if (!customer)
       throw new NotFoundException(`Não foi encontrado um cliente com o id: ${customerId}`)
 
@@ -41,14 +44,14 @@ export class OrdersService {
 
     const order = new Order(street, number, district, city, state, country)
     order.customer = customer
-  
-    order.setItems(items.map(item => new OrderItem(item.productId, item.quantity, item.unitPrice, order)))
+
+    this.setNewOrderItems(order, input.items);
     
     await this.ordersRepository.save(order)
     await this.orderItemsRepository.save(order.items)
   }
 
-  async update(id: number, input: UpdateOrderDto) {
+  async update(id: string, input: UpdateOrderDto) {
     const { street, number, district, city, items } = input;
 
     if (items.length < 1)
@@ -65,9 +68,25 @@ export class OrdersService {
     order.city = city
 
     await this.orderItemsRepository.remove(order.items)
-    order.setItems(items.map(x => new OrderItem(x.productId, x.quantity, x.unitPrice, order)))
+    await this.setNewOrderItems(order, input.items);
 
     await this.ordersRepository.save(order)
     await this.orderItemsRepository.save(order.items)
   }
+
+  async setNewOrderItems(order: Order, items: OrderItemDto[]) {
+    var orderItems = [];
+    
+    items.map(async item => {
+      const product = await this.productsRepository.findOneBy({ id: item.productId });
+
+      if (!product)
+        throw new NotFoundException(`Não foi encontrado um produto com o id: ${item.productId}`)
+      
+      orderItems.push(new OrderItem(item.quantity, item.unitPrice, product, order))
+    });
+
+    order.setItems(orderItems)
+  }
+
 }

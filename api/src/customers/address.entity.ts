@@ -1,10 +1,13 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, ManyToOne } from "typeorm"
 import { Customer } from "./customer.entity"
+import { BaseEntity } from "src/common/entity/base-entity.entity"
 
 @Entity()
-export class Address{
+export class Address extends BaseEntity {
     constructor(street: string, number: number, district: string, city: string, state: string, country: string)
     {
+        super()
+
         this.street = street
         this.number = number
         this.district = district
@@ -12,10 +15,6 @@ export class Address{
         this.state = state
         this.country = country
     }
-
-    @PrimaryGeneratedColumn()
-    id: number
-
 
     @Column()
     street: string
@@ -34,7 +33,7 @@ export class Address{
 
     @Column()
     country: string
-
+    
 
     @ManyToOne(() => Customer, (customer) => customer.addresses)
     customer: Customer

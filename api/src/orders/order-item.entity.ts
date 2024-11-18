@@ -1,23 +1,20 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne} from "typeorm";
 import { Order } from "./order.entity";
+import { BaseEntity } from "src/common/entity/base-entity.entity";
+import { Product } from "./product.entity";
 
 @Entity()
-export class OrderItem {
-    constructor(productId: number, quantity: number, unitPrice: number, order: Order){
-        this.productId = productId
+export class OrderItem extends BaseEntity {
+    constructor(quantity: number, unitPrice: number, product: Product ,order: Order){
+        super()
+
         this.quantity = quantity
         this.unitPrice = unitPrice
+        this.product = product
         this.order = order
 
         this.totalPrice = quantity * unitPrice
     }
-
-    @PrimaryGeneratedColumn()
-    id: number;
-
-
-    @Column()
-    productId: number
 
     @Column()
     quantity: number
@@ -31,4 +28,8 @@ export class OrderItem {
 
     @ManyToOne(() => Order, (order) => order.items)
     order: Order
+
+
+    @ManyToOne(() => Product)
+    product: Product
 }

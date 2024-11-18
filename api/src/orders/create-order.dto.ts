@@ -1,5 +1,5 @@
 export class CreateOrderDto {
-    customerId: number
+    customerId: string
     street: string
     number: number
     district: string
@@ -11,7 +11,7 @@ export class CreateOrderDto {
 }
 
 export class OrderItemDto {
-    productId: number
+    productId: string
     quantity: number
     unitPrice: number
 }

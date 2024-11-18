@@ -4,7 +4,7 @@ export class CreateOrderItemsTable1731793120241 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(new Table({
-            name: 'order_items',
+            name: 'order_item',
             columns: [
                 {
                     name: 'id',
@@ -16,28 +16,34 @@ export class CreateOrderItemsTable1731793120241 implements MigrationInterface {
                     type: 'int',
                 },
                 {
-                    name: 'unit_price',
+                    name: 'unitPrice',
                     type: 'float8',
                 },
                 {
-                    name: 'total_price',
+                    name: 'totalPrice',
                     type: 'float8',
                 },
                 {
-                    name: 'created_at',
+                    name: 'createdAt',
                     type: 'timestamp',
                     default: 'CURRENT_TIMESTAMP'
                 },
                 {
-                    name: 'updated_at',
+                    name: 'updatedAt',
                     type: 'timestamp',
+                    isNullable: true
                 },
+                {
+                    name: 'deletedAt',
+                    type: 'timestamp',
+                    isNullable: true
+                }
             ]
         }))
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('order_items');
+        await queryRunner.dropTable('order_item');
     }
 
 }

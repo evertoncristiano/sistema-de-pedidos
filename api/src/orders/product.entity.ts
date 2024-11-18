@@ -1,10 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { BaseEntity } from "src/common/entity/base-entity.entity"
+import { Column, Entity } from "typeorm"
 
 @Entity()
-export class Product {
-    @PrimaryGeneratedColumn()
-    id: number
-
+export class Product extends BaseEntity {
+    
+    constructor() {
+        super()
+    }
     
     @Column()
     description: string

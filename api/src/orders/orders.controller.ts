@@ -10,7 +10,7 @@ export class OrdersController {
 
   @Get(':id')
   findOne(@Param('id') id: string): Promise<Order> {
-    return this.ordersService.findOne(+id);
+    return this.ordersService.findOne(id);
   }
   
   @Post()
@@ -20,6 +20,6 @@ export class OrdersController {
 
   @Put(':id')
   update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto): Promise<void> {
-    return this.ordersService.update(+id, updateOrderDto);
+    return this.ordersService.update(id, updateOrderDto);
   }
 }

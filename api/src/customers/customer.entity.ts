@@ -1,11 +1,13 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, OneToMany } from "typeorm"
 import { Address } from "./address.entity"
 import { Order } from "src/orders/order.entity"
+import { BaseEntity } from "src/common/entity/base-entity.entity"
 
 @Entity()
-export class Customer {
-    @PrimaryGeneratedColumn()
-    id: number
+export class Customer extends BaseEntity {
+    constructor() {
+      super()
+    }
 
     @Column()
     name: string

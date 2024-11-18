@@ -13,7 +13,7 @@ export class CustomersService {
     @InjectRepository(Address) private readonly addressesRepository: Repository<Address>
   ) {}
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     const customer = await this.customersRepository.findOne({ 
       where: { id },
       relations: { addresses: true }
@@ -42,7 +42,7 @@ export class CustomersService {
     return customer
   }
 
-  async update(id: number, input: UpdateCustomerDto) {
+  async update(id: string, input: UpdateCustomerDto) {
     const customer = await this.findOne(id);
 
     customer.name = input.name

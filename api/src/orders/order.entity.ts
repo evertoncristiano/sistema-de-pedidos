@@ -1,12 +1,15 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 import { OrderItem } from "./order-item.entity";
 import { Customer } from "src/customers/customer.entity";
+import { BaseEntity } from "src/common/entity/base-entity.entity";
 
 @Entity()
-export class Order {
+export class Order extends BaseEntity {
 
     constructor(street: string, number: number, district: string, city: string, state: string, country: string)
     {
+        super()
+
         this.street = street
         this.number = number
         this.district = district
@@ -16,9 +19,6 @@ export class Order {
 
         this.date = new Date
     }
-
-    @PrimaryGeneratedColumn()
-    id: number;
 
     @Column()
     date: Date
@@ -56,9 +56,9 @@ export class Order {
 
     setItems (items: OrderItem[])
     {
-        this.totalPrice = 0
         this.items = items
-
+        
+        this.totalPrice = 0
         items.map(item => this.incrementTotalPrice(item.totalPrice))
     }
 

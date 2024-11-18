@@ -3,23 +3,23 @@ import { MigrationInterface, QueryRunner, TableColumn, TableForeignKey } from "t
 export class AddCustomersIdToAddressesTable1731794178950 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.addColumn('addresses', new TableColumn({
-            name: 'customersId',
+        await queryRunner.addColumn('address', new TableColumn({
+            name: 'customerId',
             type: 'uuid',
         }));
 
-        await queryRunner.createForeignKey('addresses', new TableForeignKey({
-            name: 'addressesCustomersId',
-            columnNames: ['customersId'],
-            referencedTableName: 'customers',
+        await queryRunner.createForeignKey('address', new TableForeignKey({
+            name: 'addressCustomerId',
+            columnNames: ['customerId'],
+            referencedTableName: 'customer',
             referencedColumnNames: ['id'],
         }));
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropForeignKey('addresses', 'addressesCustomersId');
+        await queryRunner.dropForeignKey('address', 'addressCustomerId');
         
-        await queryRunner.dropColumn('addresses', 'customersId');
+        await queryRunner.dropColumn('address', 'customerId');
     }
 
 }

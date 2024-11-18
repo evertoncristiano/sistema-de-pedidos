@@ -6,7 +6,7 @@ export class CreateCustomersTable1731791317655 implements MigrationInterface {
         await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
 
         await queryRunner.createTable(new Table({
-            name: 'customers',
+            name: 'customer',
             columns: [
                 {
                     name: 'id',
@@ -22,20 +22,26 @@ export class CreateCustomersTable1731791317655 implements MigrationInterface {
                     type: 'varchar',
                 },
                 {
-                    name: 'created_at',
+                    name: 'createdAt',
                     type: 'timestamp',
                     default: 'CURRENT_TIMESTAMP'
                 },
                 {
-                    name: 'updated_at',
+                    name: 'updatedAt',
                     type: 'timestamp',
+                    isNullable: true
                 },
+                {
+                    name: 'deletedAt',
+                    type: 'timestamp',
+                    isNullable: true
+                }
             ]
         }))
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('customers');
+        await queryRunner.dropTable('customer');
     }
 
 }
