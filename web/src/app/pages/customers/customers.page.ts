@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CustomersService } from '../../services/customers.service';
+import { CustomerModel } from '../../models/customer.model';
 
 @Component({
   selector: 'app-customers',
@@ -9,5 +10,10 @@ import { CustomersService } from '../../services/customers.service';
   styleUrl: './customers.page.css'
 })
 export class CustomersPage {
-  private customerService = inject(CustomersService)
+  constructor(private customerService: CustomersService) {
+  }
+
+  createNewCustomer() {
+    return this.customerService.getById("3b7b5a80-7bfe-4429-956e-0049bf3e4ef4");
+  }
 }
