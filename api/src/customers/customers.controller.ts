@@ -8,6 +8,11 @@ import { Customer } from './customer.entity';
 export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}
 
+  @Get()
+  getAll(): Promise<Customer[]> {
+    return this.customersService.getAll();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string): Promise<Customer> {
     return this.customersService.findOne(id);

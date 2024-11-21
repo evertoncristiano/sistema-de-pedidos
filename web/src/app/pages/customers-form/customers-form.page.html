@@ -1,0 +1,52 @@
+<main class="container-xxl p-3">
+    <section class="d-flex justify-content-between align-items-center">
+        <h1>{{ pageTitle }}</h1>
+        <button (click)="cancel()" class="btn"><i class="bi bi-x-lg"></i></button>
+    </section>
+    <hr>
+
+    <form #customersForm="ngForm">
+        <section class="mt-4">
+            <h2>Dados Pessoais</h2>
+            
+            <div class="form-group">
+                <label for="name">Nome</label>
+                <input class="form-control" name="name" [(ngModel)]="customer.name" type="text">
+            </div>
+    
+            <div class="form-group">
+                <label for="telephone">Telefone</label>
+                <input class="form-control" name="telephone" [(ngModel)]="customer.telephone" type="text">
+            </div>
+        </section>
+
+        <section class="mt-4">
+            <h2>Endereço</h2>
+            
+            <div class="form-group">
+                <label for="street">Rua</label>
+                <input class="form-control" name="street" [(ngModel)]="customer.address.street" type="text">
+            </div>
+
+            <div class="form-group">
+                <label for="number">Número</label>
+                <input class="form-control" name="number" [(ngModel)]="customer.address.number" type="number">
+            </div>
+
+            <div class="form-group">
+                <label for="district">Bairro</label>
+                <input class="form-control" name="district" [(ngModel)]="customer.address.district" type="text">
+            </div>
+
+            <div class="form-group">
+                <label for="city">Município</label>
+                <input class="form-control" name="city" [(ngModel)]="customer.address.city" type="text">
+            </div>
+        </section>
+
+        <section class="d-flex justify-content-end mt-4">
+            <button (click)="save()" class="btn btn-success"><i class="bi bi-floppy"></i> Salvar</button>
+            <button (click)="cancel()" class="btn"><i class="bi bi-x-lg"></i> Cancelar</button>
+        </section>
+    </form>
+</main>

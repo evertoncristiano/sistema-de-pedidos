@@ -13,6 +13,12 @@ export class CustomersService {
     @InjectRepository(Address) private readonly addressesRepository: Repository<Address>
   ) {}
 
+  async getAll() {
+    return await this.customersRepository.find({
+      relations: { addresses: true }
+    })
+  }
+
   async findOne(id: string) {
     const customer = await this.customersRepository.findOne({ 
       where: { id },

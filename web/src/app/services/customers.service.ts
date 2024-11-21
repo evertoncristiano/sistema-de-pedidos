@@ -8,14 +8,18 @@ import { CustomerModel } from '../models/customer.model';
 export class CustomersService {
   private path: string = 'customers'
 
-  constructor(private httpService: HttpService) { 
+  constructor(private httpService: HttpService) {
+  }
+
+  getAll() {
+    return this.httpService.getAll(this.path);
   }
 
   getById(id: string) {
     return this.httpService.getOne(this.path, id);
   }
 
-  save(customer: CustomerModel) {
+  create(customer: CustomerModel) {
     return this.httpService.post(this.path, customer);
   }
 

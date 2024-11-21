@@ -9,12 +9,17 @@ import { environment } from '../../environments/environment.development';
 export class HttpService {
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
+  getAll(path: string) {
+    let url = this.getUrl(path);
+
+    return this.httpClient.get(url);
+  }
+
   getOne(path: string, id: string) {
     let url = this.getUrl(path, id)
     console.log('GET: ', url)
 
     return this.httpClient.get(url, { params: this.getDefaultParams() })
-      .subscribe(resultado => console.log(resultado))
   }
 
   post(path: string, object: object) {
@@ -47,7 +52,7 @@ export class HttpService {
 
     url += `/${path}`
 
-    if(id != '')
+    if (id != '')
       url += `/${id}`
 
     return url;
