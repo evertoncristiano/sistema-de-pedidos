@@ -20,10 +20,6 @@ export class CustomersPage implements OnInit {
     this.getItems();
   }
 
-  ngOnChanges() {
-    this.getItems();
-  }
-
   getItems() {
     this.customerService.getAll().subscribe((result: any) => {
       this.customers = result.map((customer: any) => {

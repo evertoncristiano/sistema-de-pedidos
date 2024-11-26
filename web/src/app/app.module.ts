@@ -1,38 +1,39 @@
-import { NgModule, provideZoneChangeDetection } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { provideRouter, RouterModule} from '@angular/router';
-
+import { NgModule } from '@angular/core';
+import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
-import { routes } from './app.routes';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
+import { AppLayoutModule } from './layout/app.layout.module';
+import { FormsModule } from '@angular/forms';
 import { CustomersPage } from './pages/customers/customers.page';
 import { CustomersFormPage } from './pages/customers-form/customers-form.page';
 import { OrdersPage } from './pages/orders/orders.page';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 
+import { CardModule } from 'primeng/card';
+import { ToolbarModule } from 'primeng/toolbar';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
-    imports: [
-        RouterModule.forRoot(routes), 
-        BrowserModule,
-        CommonModule,
-        FormsModule,
-    ],
     declarations: [
+        AppComponent,
         CustomersPage,
         CustomersFormPage,
         OrdersPage,
-
-        AppComponent,
     ],
-    bootstrap: [
-        AppComponent
+    imports: [
+        AppRoutingModule,
+        AppLayoutModule,
+        CommonModule,
+        FormsModule,
+
+        CardModule,
+        ToolbarModule,
+        TableModule,
+        ButtonModule,
     ],
     providers: [
-        provideZoneChangeDetection({ eventCoalescing: true }), 
-        provideRouter(routes), 
-        provideHttpClient(withInterceptorsFromDi())
-    ]
+        { provide: LocationStrategy, useClass: HashLocationStrategy },
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

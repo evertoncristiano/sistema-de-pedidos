@@ -45,14 +45,14 @@ export class CustomersFormPage implements OnInit {
 
   save() {
     this.submitted = true
-    
+
     if (this.customer.id) {
       this.customerService.update(this.customer.id, this.customer)
     } else {
       this.customerService.create(this.customer)
     }
 
-    this.router.navigate(['/customers'])
+    this.router.navigate(['/customers'], { state: { reload: true }})
   }
 
   cancel(): void {
