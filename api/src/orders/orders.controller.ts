@@ -8,6 +8,11 @@ import { Order } from './order.entity';
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
+  @Get()
+  getAll(): Promise<Order[]> {
+    return this.ordersService.getAll();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string): Promise<Order> {
     return this.ordersService.findOne(id);

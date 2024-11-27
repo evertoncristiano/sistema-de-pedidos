@@ -15,6 +15,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PanelModule } from 'primeng/panel';
 import { MenubarModule } from 'primeng/menubar';
+import { OrdersFormPage } from './pages/orders-form/orders-form.Page';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { MenubarModule } from 'primeng/menubar';
         CustomersPage,
         CustomersFormPage,
         OrdersPage,
+        OrdersFormPage
     ],
     imports: [
         AppRoutingModule,

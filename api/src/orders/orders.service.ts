@@ -19,22 +19,27 @@ export class OrdersService {
   ) {
   }
 
+  async getAll() {
+    return await this.ordersRepository.find({
+      relations: { customer: true, items: true }
+    })
+  }
+
   async findOne(id: string): Promise<Order> {
     return this.ordersRepository.findOne({
       where: { id },
       relations: {
-        items: { 
-          product: true 
+        items: {
+          product: true
         },
         customer: true
       }
     })
   }
 
-  async create(input: CreateOrderDto): Promise<void>
-  {
-    const { customerId, street, number, district, city, state, country, items} = input
-    
+  async create(input: CreateOrderDto): Promise<void> {
+    const { customerId, street, number, district, city, state, country, items } = input
+
     const customer = await this.customersRepository.findOneBy({ id: customerId })
     if (!customer)
       throw new NotFoundException(`Não foi encontrado um cliente com o id: ${customerId}`)
@@ -46,7 +51,7 @@ export class OrdersService {
     order.customer = customer
 
     this.setNewOrderItems(order, input.items);
-    
+
     await this.ordersRepository.save(order)
     await this.orderItemsRepository.save(order.items)
   }
@@ -56,7 +61,7 @@ export class OrdersService {
 
     if (items.length < 1)
       throw new BadRequestException("A ordem não possuí nenhum item");
-    
+
     const order = await this.findOne(id)
 
     if (!order)
@@ -76,13 +81,13 @@ export class OrdersService {
 
   async setNewOrderItems(order: Order, items: OrderItemDto[]) {
     var orderItems = [];
-    
+
     items.map(async item => {
       const product = await this.productsRepository.findOneBy({ id: item.productId });
 
       if (!product)
         throw new NotFoundException(`Não foi encontrado um produto com o id: ${item.productId}`)
-      
+
       orderItems.push(new OrderItem(item.quantity, item.unitPrice, product, order))
     });
 
