@@ -1,27 +1,61 @@
-<div>
-    <a href="/customers" class="btn"><i class="bi bi-search"></i></a>
-    <a href="/customers/new" class="btn"><i class="bi bi-plus-lg"></i></a>
-</div>
+<h1>Clientes</h1>
+<p-menubar [model]="tools" />
 
-<p-card header="Clientes">
-    <p-table [value]="customers">
-        <ng-template pTemplate="header">
-            <tr>
-                <th>Nome</th>
-                <th>Telefone</th>
-                <th>Cidade</th>
-                <th>Ações</th>
-            </tr>
+<p-table #dt [value]="customers" dataKey="id" rowHover="true" [loading]="loading" selectionMode="single" [(selection)]="selectedCustomer" >
+    <!--
+        <ng-template pTemplate="caption">
+            <div class="flex justify-content-between">
+                <p-button [outlined]="true" icon="pi pi-filter-slash" label="Limpar filtros" (onClick)="clear(dt)" />
+                <p-iconField iconPosition="left">
+                    <p-inputIcon>
+                        <i class="pi pi-search"></i>
+                    </p-inputIcon>
+                    <input pInputText type="text" [(ngModel)]="searchValue" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar" />
+                </p-iconField>
+            </div>
         </ng-template>
-        <ng-template pTemplate="body" let-customer>
-            <tr>
-                <td>{{customer.name}}</td>
-                <td>{{customer.telephone}}</td>
-                <td>{{customer.address.city}}</td>
-                <td>
-                    <p-button icon="pi pi-pencil" severity="secondary" (click)="editCustomer(customer.id)" />
-                </td>
-            </tr>
-        </ng-template>
-    </p-table>
-</p-card>
+        -->
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="name">
+                <div class="flex justify-content-between align-items-center">
+                    Nome
+                    <p-sortIcon field="name" />
+                </div>
+            </th>
+            <th pSortableColumn="telephone">
+                <div class="flex justify-content-between align-items-center">
+                    Telefone
+                    <p-sortIcon field="telephone" />
+                </div>
+            </th>
+            <th pSortableColumn="city">
+                <div class="flex justify-content-between align-items-center">
+                    Município
+                    <p-sortIcon field="city" />
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-customer>
+        <tr [pSelectableRow]="customer">
+            <td>
+                <span class="p-column-title">Name</span>
+                {{ customer.name }}
+            </td>
+            <td>
+                <span class="p-column-title">Telefone</span>
+                {{ customer.telephone }}
+            </td>
+            <td>
+                <span class="p-column-title">Município</span>
+                {{ customer.address.city }}
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">Nenhum registro encontrado</td>
+        </tr>
+    </ng-template>
+</p-table>

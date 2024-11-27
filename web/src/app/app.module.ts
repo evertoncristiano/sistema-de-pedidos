@@ -12,6 +12,10 @@ import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { PanelModule } from 'primeng/panel';
+import { MenubarModule } from 'primeng/menubar';
+
 
 @NgModule({
     declarations: [
@@ -30,6 +34,9 @@ import { ButtonModule } from 'primeng/button';
         ToolbarModule,
         TableModule,
         ButtonModule,
+        InputTextModule,
+        PanelModule,
+        MenubarModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
