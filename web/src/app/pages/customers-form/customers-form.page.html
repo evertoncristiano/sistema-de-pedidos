@@ -1,52 +1,56 @@
-<main class="container-xxl p-3">
-    <section class="d-flex justify-content-between align-items-center">
-        <h1>{{ pageTitle }}</h1>
-        <button (click)="cancel()" class="btn"><i class="bi bi-x-lg"></i></button>
-    </section>
-    <hr>
-
-    <form>
-        <section class="mt-4">
-            <h2>Dados Pessoais</h2>
+<p-panel header="{{pageTitle}}">
+    <div>
+        <p-fieldset legend="Dados Pessoais">
+            <div class="mt-3">
+                <p-floatLabel>
+                    <input pInputText id="name" [(ngModel)]="customer.name" />
+                    <label for="name">Nome</label>
+                </p-floatLabel>
+            </div>
             
-            <div class="form-group">
-                <label for="name">Nome</label>
-                <input class="form-control" name="name" [(ngModel)]="customer.name" type="text">
+            <div class="mt-5">
+                <p-floatLabel>
+                    <p-inputMask mask="99 99999-9999" [(ngModel)]="customer.telephone" />
+                    <label for="telephone">Telefone</label>
+                </p-floatLabel>
             </div>
-    
-            <div class="form-group">
-                <label for="telephone">Telefone</label>
-                <input class="form-control" name="telephone" [(ngModel)]="customer.telephone" type="text">
-            </div>
-        </section>
+        </p-fieldset>
+    </div>
 
-        <section class="mt-4">
-            <h2>Endereço</h2>
-            
-            <div class="form-group">
-                <label for="street">Rua</label>
-                <input class="form-control" name="street" [(ngModel)]="customer.address.street" type="text">
-            </div>
-
-            <div class="form-group">
-                <label for="number">Número</label>
-                <input class="form-control" name="number" [(ngModel)]="customer.address.number" type="number">
+    <div class="mt-3">
+        <p-fieldset legend="Endereço">
+            <div class="mt-3">
+                <p-floatLabel>
+                    <input pInputText id="street" [(ngModel)]="customer.address.street" />
+                    <label for="street">Rua</label>
+                </p-floatLabel>
             </div>
 
-            <div class="form-group">
-                <label for="district">Bairro</label>
-                <input class="form-control" name="district" [(ngModel)]="customer.address.district" type="text">
+            <div class="mt-5">
+                <p-floatLabel>
+                    <p-inputNumber [(ngModel)]="customer.address.number" mode="decimal" inputId="withoutgrouping" [useGrouping]="false" />
+                    <label for="number">Número</label>
+                </p-floatLabel>
             </div>
-
-            <div class="form-group">
-                <label for="city">Município</label>
-                <input class="form-control" name="city" [(ngModel)]="customer.address.city" type="text">
+            <div class="mt-5">
+                <p-floatLabel>
+                    <input pInputText id="district" [(ngModel)]="customer.address.district" />
+                    <label for="district">Bairro</label>
+                </p-floatLabel>
             </div>
-        </section>
+            <div class="mt-5">        
+                <p-floatLabel>
+                    <input pInputText id="city" [(ngModel)]="customer.address.city" />
+                    <label for="city">Município</label>
+                </p-floatLabel>
+            </div>
+        </p-fieldset>
+    </div>
 
-        <section class="d-flex justify-content-end mt-4">
-            <button (click)="save()" class="btn btn-success"><i class="bi bi-floppy"></i> Salvar</button>
-            <button (click)="cancel()" class="btn"><i class="bi bi-x-lg"></i> Cancelar</button>
-        </section>
-    </form>
-</main>
+    <ng-template pTemplate="footer">
+        <div class="mt-3">
+            <p-button class="mr-2" label="Salvar" severity="primary" (click)="save()" />
+            <p-button label="Cancelar" severity="secondary" (click)="cancel()" />
+        </div>
+    </ng-template>
+</p-panel>

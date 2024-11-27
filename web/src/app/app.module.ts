@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { CustomersPage } from './pages/customers/customers.page';
 import { CustomersFormPage } from './pages/customers-form/customers-form.page';
 import { OrdersPage } from './pages/orders/orders.page';
+import { OrdersFormPage } from './pages/orders-form/orders-form.Page';
 
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -15,8 +16,10 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PanelModule } from 'primeng/panel';
 import { MenubarModule } from 'primeng/menubar';
-import { OrdersFormPage } from './pages/orders-form/orders-form.Page';
-
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { FieldsetModule } from 'primeng/fieldset';
+import { InputMaskModule } from 'primeng/inputmask';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
     declarations: [
@@ -38,7 +41,11 @@ import { OrdersFormPage } from './pages/orders-form/orders-form.Page';
         ButtonModule,
         InputTextModule,
         PanelModule,
-        MenubarModule
+        MenubarModule,
+        FloatLabelModule,
+        FieldsetModule,
+        InputMaskModule,
+        InputNumberModule,
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
