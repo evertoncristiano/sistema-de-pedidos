@@ -1,5 +1,6 @@
 import { BaseModel } from "./base.model";
 import { CustomerModel } from "./customer.model";
+import { OrderItemModel } from "./order-item.model";
 
 export class OrderModel extends BaseModel {
     street: string
@@ -12,6 +13,7 @@ export class OrderModel extends BaseModel {
     totalPrice: number
 
     customer: CustomerModel
+    items: OrderItemModel[]
 
     constructor(order?: OrderModel) {
         super();
@@ -27,5 +29,6 @@ export class OrderModel extends BaseModel {
         this.totalPrice = order?.totalPrice
         
         this.customer = order?.customer ? order.customer : new CustomerModel()
+        this.items = order?.items ? order.items : []
     }
 }

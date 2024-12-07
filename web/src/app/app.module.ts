@@ -20,6 +20,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { FieldsetModule } from 'primeng/fieldset';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
     declarations: [
@@ -46,6 +47,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
         FieldsetModule,
         InputMaskModule,
         InputNumberModule,
+        DropdownModule,
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
