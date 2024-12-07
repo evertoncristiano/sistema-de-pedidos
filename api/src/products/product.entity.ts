@@ -4,12 +4,18 @@ import { Column, Entity } from "typeorm"
 @Entity()
 export class Product extends BaseEntity {
     
-    constructor() {
+    constructor(name: string, description: string, price: number) {
         super()
+
+        this.name = name
+        this.description = description
+        this.price = price
     }
+    @Column()
+    name: string
     
     @Column()
-    description: string
+    description?: string
 
     @Column()
     price: number

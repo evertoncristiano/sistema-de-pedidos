@@ -6,7 +6,7 @@ import { Customer } from './customers/customer.entity';
 import { Address } from './customers/address.entity';
 import { Order } from './orders/order.entity';
 import { OrderItem } from './orders/order-item.entity';
-import { Product } from './orders/product.entity';
+import { Product } from './products/product.entity';
 
 @Module({
     imports: [
