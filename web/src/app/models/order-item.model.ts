@@ -8,16 +8,20 @@ export class OrderItemModel extends BaseModel {
     totalPrice: number
 
     order: OrderModel
+
+    productId: string
     product: ProductModel
 
     constructor(orderItem?: OrderItemModel) {
-        super()
+        super(orderItem)
 
         this.quantity = orderItem?.quantity;
         this.unitPrice = orderItem?.unitPrice;
         this.totalPrice = orderItem?.totalPrice;
 
         this.order = orderItem?.order;
+
+        this.productId = orderItem.productId
         this.product = orderItem?.product;
     }
 }

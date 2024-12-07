@@ -3,7 +3,7 @@ import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/c
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppLayoutModule } from './layout/app.layout.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomersPage } from './pages/customers/customers.page';
 import { CustomersFormPage } from './pages/customers-form/customers-form.page';
 import { OrdersPage } from './pages/orders/orders.page';
@@ -35,6 +35,7 @@ import { DropdownModule } from 'primeng/dropdown';
         AppLayoutModule,
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
 
         CardModule,
         ToolbarModule,

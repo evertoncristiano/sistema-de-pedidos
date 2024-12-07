@@ -12,13 +12,14 @@ export class OrderModel extends BaseModel {
     date: Date
     totalPrice: number
 
+    customerId: string
     customer: CustomerModel
+    
     items: OrderItemModel[]
 
     constructor(order?: OrderModel) {
-        super();
+        super(order);
 
-        this.id = order?.id
         this.street = order?.street
         this.number = order?.number
         this.district = order?.district
@@ -28,6 +29,7 @@ export class OrderModel extends BaseModel {
         this.date = order?.date
         this.totalPrice = order?.totalPrice
         
+        this.customerId = order?.customerId
         this.customer = order?.customer ? order.customer : new CustomerModel()
         this.items = order?.items ? order.items : []
     }

@@ -22,11 +22,14 @@ export class OrdersPage implements OnInit {
       { label: "Editar", icon: "pi pi-pencil", command: () => this.edit() },
       { label: "Excluir", icon: "pi pi-trash", disabled: true},
     ]
+
+    this.getItems()
   }
 
   ngOnInit() {
-    this.getItems();
   }
+
+
 
   getItems() {
     this.ordersService.getAll().subscribe({

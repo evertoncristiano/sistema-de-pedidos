@@ -55,7 +55,7 @@
                     <p-dropdown 
                         [options]="products" 
                         [(ngModel)]="selectedProduct" 
-                        optionLabel="description" 
+                        optionLabel="name" 
                         placeholder="Selecione um produto"
                         id="product"
                         (onChange)="changeProduct()" 
@@ -96,7 +96,7 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-item>
                         <tr>
-                            <td>{{ item.product.description }}</td>
+                            <td>{{ item.product.name }}</td>
                             <td>{{ item.quantity }}</td>
                             <td>{{ item.unitPrice | currency:'BRL' }}</td>
                             <td>{{ item.totalPrice | currency:'BRL' }}</td>

@@ -5,14 +5,17 @@ export class AddressModel extends BaseModel {
     number?: number
     district?: string
     city?: string
+    state?: string
+    country?: string
 
     constructor(address?: AddressModel) {
-        super();
+        super(address);
 
-        this.id = address?.id
         this.street = address?.street
         this.number = address?.number
         this.district = address?.district
         this.city = address?.city
+        this.state = address?.state
+        this.country = address?.country
     }
 }

@@ -7,7 +7,7 @@ export class CustomerModel extends BaseModel {
     address: AddressModel
 
     constructor(customer?: CustomerModel) {
-        super();
+        super(customer);
 
         this.id = customer?.id
         this.name = customer?.name
