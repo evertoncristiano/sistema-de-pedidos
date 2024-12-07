@@ -1,29 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { OrderModel } from '../models/order.model';
+import { BaseService } from './base.service';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class OrdersService {
-  private path: string = 'orders'
+@Injectable({ providedIn: 'root' })
+export class OrdersService extends BaseService {
 
-  constructor(private httpService: HttpService) {
+  constructor(httpService: HttpService) {
+    super(httpService, "orders")
   }
 
-  getAll() {
-    return this.httpService.getAll(this.path);
-  }
-
-  getById(id: string) {
-    return this.httpService.getOne(this.path, id);
-  }
-
-  create(order: OrderModel) {
-    return this.httpService.post(this.path, order);
-  }
-
-  update(id: string, order: OrderModel) {
-    return this.httpService.put(this.path, id, order);
-  }
 }

@@ -3,9 +3,7 @@ import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { environment } from '../../environments/environment';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class HttpService {
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
 

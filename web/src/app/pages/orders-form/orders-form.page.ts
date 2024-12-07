@@ -137,14 +137,7 @@ export class OrdersFormPage implements OnInit {
   }
 
   save() {
-    this.submitted = true
-
-    if (this.order.id) {
-      this.orderService.update(this.order.id, this.order)
-    } else {
-      this.orderService.create(this.order)
-    }
-
+    this.orderService.save(this.order)
     this.router.navigate(['/orders'])
   }
 
