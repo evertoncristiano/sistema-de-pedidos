@@ -1,0 +1,34 @@
+<ion-content class="ion-padding">
+  <h1>{{title}}</h1>
+
+  <form [formGroup]="customerForm" (ngSubmit)="save()">
+    <h2>Dados Pessoais</h2>
+    <ion-item>
+      <ion-input type="text" label="Nome" labelPlacement="stacked" formControlName="name"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-input type="tel" label="Telefone" labelPlacement="stacked" formControlName="telephone"></ion-input>
+    </ion-item>
+
+    
+    <div formGroupName="address">
+      <h2>Endereço</h2>
+      <ion-item>
+        <ion-input type="text" label="Logradouro" labelPlacement="stacked" formControlName="street"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="number" label="Número" labelPlacement="stacked" formControlName="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" label="Bairro" labelPlacement="stacked" formControlName="district"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" label="Cidade" labelPlacement="stacked" formControlName="city"></ion-input>
+      </ion-item>
+    </div>
+  
+    <ion-button type="submit" [disabled]="!customerForm.valid" color="primary">Salvar</ion-button>
+    <ion-button color="light" (click)="cancel()" >Voltar</ion-button>
+  </form>
+</ion-content>
