@@ -11,6 +11,7 @@ import { FormCustomersComponent } from './customers/form-customers/form-customer
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { HomeComponent } from './home/home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MaskitoDirective } from '@maskito/angular';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     IonicModule.forRoot(), 
     AppRoutingModule,
     ReactiveFormsModule,
+    MaskitoDirective,
   ],
   providers: [
     { 

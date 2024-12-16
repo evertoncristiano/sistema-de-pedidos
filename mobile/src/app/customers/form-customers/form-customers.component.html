@@ -8,12 +8,13 @@
     </ion-item>
   
     <ion-item>
-      <ion-input type="tel" label="Telefone" labelPlacement="stacked" formControlName="telephone"></ion-input>
+      <ion-input type="tel" label="Telefone" labelPlacement="stacked" formControlName="telephone" [maskito]="phoneMask" [maskitoElement]="maskPredicate"></ion-input>
     </ion-item>
 
     
     <div formGroupName="address">
       <h2>Endereço</h2>
+      
       <ion-item>
         <ion-input type="text" label="Logradouro" labelPlacement="stacked" formControlName="street"></ion-input>
       </ion-item>
@@ -28,6 +29,7 @@
       </ion-item>
     </div>
   
+    <br>
     <ion-button type="submit" [disabled]="!customerForm.valid" color="primary">Salvar</ion-button>
     <ion-button color="light" (click)="cancel()" >Voltar</ion-button>
   </form>
