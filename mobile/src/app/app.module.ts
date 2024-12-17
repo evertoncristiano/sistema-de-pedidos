@@ -14,10 +14,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaskitoDirective } from '@maskito/angular';
 import { ListOrdersComponent } from './orders/list-orders/list-orders.component';
 import { FormOrdersComponent } from './orders/form-orders/form-orders.component';
+import { ToastComponent } from './core/components/toast/toast.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ToastComponent,
     HomeComponent,
     ListCustomersComponent,
     FormCustomersComponent,

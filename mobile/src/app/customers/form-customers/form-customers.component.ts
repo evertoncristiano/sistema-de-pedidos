@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MaskitoElementPredicate, MaskitoOptions } from '@maskito/core';
+import { ToastService } from 'src/app/core/components/toast/toast.service';
 import { Customer } from 'src/app/core/models/customer';
 import { CustomersService } from 'src/app/core/services/customers.service';
 
@@ -35,6 +36,7 @@ export class FormCustomersComponent implements OnInit {
     private locale: Location,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private toastService: ToastService,
     private customerService: CustomersService) { }
 
   ngOnInit() {
@@ -68,11 +70,11 @@ export class FormCustomersComponent implements OnInit {
   save() {
       this.customerService.save(this.customerForm.value as Customer).subscribe({
         next: () => {
-          console.log("O cliente foi salvo com sucesso");
           this.customerService.getCustomers();
           this.router.navigateByUrl('customers');
+          this.toastService.show('O Cliente foi salvo com sucesso.')
         },
-        error: (error) => console.log(error)
+        error: (error) => this.toastService.show(error.error.message)
       });
   }
 

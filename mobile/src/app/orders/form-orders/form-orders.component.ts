@@ -10,6 +10,7 @@ import { CustomersService } from 'src/app/core/services/customers.service';
 import { OrdersService } from 'src/app/core/services/orders.service';
 import { Product } from 'src/app/core/models/product';
 import { ProductsService } from 'src/app/core/services/products.service';
+import { ToastService } from 'src/app/core/components/toast/toast.service';
 
 @Component({
     selector: 'app-form-orders',
@@ -37,6 +38,7 @@ export class FormOrdersComponent implements OnInit {
         private locale: Location,
         private activatedRoute: ActivatedRoute,
         private router: Router,
+        private toastService: ToastService,
         private ordersService: OrdersService,
         private customersService: CustomersService,
         private productsService: ProductsService
@@ -109,15 +111,14 @@ export class FormOrdersComponent implements OnInit {
         order.date = new Date;
 
         order.items = this.items;
-        console.log(this.items)
 
         this.ordersService.save(order).subscribe({
             next: () => {
-                console.log("O pedido foi salvo com sucesso");
                 this.ordersService.getOrders();
                 this.router.navigateByUrl('orders');
+                this.toastService.show('O pedido foi salvo com sucesso');
             },
-            error: (error) => console.log(error)
+            error: (error) => this.toastService.show(error.error.message)
         });
     }
 
