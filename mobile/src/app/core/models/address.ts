@@ -1,6 +1,6 @@
-import { Entity } from "./entity"
+import { Model } from "./model"
 
-export class Address extends Entity {
+export class Address extends Model {
     street?: string
     number?: number
     district?: string

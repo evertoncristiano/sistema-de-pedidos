@@ -1,4 +1,4 @@
-export class Entity {
+export class Model {
     id?: string;
     createdAt?: Date;
     updatedAt?: Date;

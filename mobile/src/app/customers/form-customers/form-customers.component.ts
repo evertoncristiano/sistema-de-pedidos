@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MaskitoElementPredicate, MaskitoOptions } from '@maskito/core';
-import { Customer } from 'src/app/core/entities/customer';
+import { Customer } from 'src/app/core/models/customer';
 import { CustomersService } from 'src/app/core/services/customers.service';
 
 @Component({

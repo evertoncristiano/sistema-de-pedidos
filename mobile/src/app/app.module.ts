@@ -10,8 +10,10 @@ import { ListCustomersComponent } from './customers/list-customers/list-customer
 import { FormCustomersComponent } from './customers/form-customers/form-customers.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { HomeComponent } from './home/home/home.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaskitoDirective } from '@maskito/angular';
+import { ListOrdersComponent } from './orders/list-orders/list-orders.component';
+import { FormOrdersComponent } from './orders/form-orders/form-orders.component';
 
 @NgModule({
   declarations: [
@@ -19,11 +21,14 @@ import { MaskitoDirective } from '@maskito/angular';
     HomeComponent,
     ListCustomersComponent,
     FormCustomersComponent,
+    ListOrdersComponent,
+    FormOrdersComponent,
   ],
   imports: [
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     MaskitoDirective,
   ],

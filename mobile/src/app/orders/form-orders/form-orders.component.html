@@ -1,0 +1,107 @@
+<ion-content class="ion-padding">
+    <h1>{{title}}</h1>
+
+    <form [formGroup]="orderForm" (ngSubmit)="save()">
+        <h2>Cliente</h2>
+        <ion-item>
+            <ion-select label="Cliente" interface="popover" label-placement="stacked" formControlName="customerId"
+                (ionChange)="onChangeCustomer($event)">
+                <ion-select-option *ngFor="let customer of customers"
+                    [value]="customer.id">{{customer.name}}</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-input type="text" label="Telefone" labelPlacement="stacked" formControlName="telephone"
+                readonly="true"></ion-input>
+        </ion-item>
+
+
+        <h2>Endereço</h2>
+        <ion-item>
+            <ion-input type="text" label="Logradouro" labelPlacement="stacked" formControlName="street"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input type="number" label="Número" labelPlacement="stacked" formControlName="number"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input type="text" label="Bairro" labelPlacement="stacked" formControlName="district"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input type="text" label="Cidade" labelPlacement="stacked" formControlName="city"></ion-input>
+        </ion-item>
+
+
+        <ion-grid>
+            <ion-row class="ion-align-items-center ion-justify-content-between">
+                <ion-col size="4">
+                    <h2>Produtos</h2>
+                </ion-col>
+                <ion-col size="1">
+                    <ion-button size="small" fill="outline" id="add-item">
+                        <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-list>
+            <ion-item *ngFor="let item of items">
+                <ion-grid>
+                    <ion-row class="ion-align-items-center ion-justify-content-between">
+                        <ion-col size="11">
+                            <h3>{{item.product.name}}</h3>
+                            <small>{{item.quantity}}x {{item.unitPrice}} {{item.totalPrice}}</small>
+                        </ion-col>
+                        <ion-col size="1">
+                            <ion-button size="small" fill="outline" (click)="removeItem(item)">
+                                <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+                            </ion-button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-item>
+        </ion-list>
+
+        <h2>Total: {{total}}</h2>
+
+        <br>
+        <ion-button type="submit" [disabled]="!orderForm.valid" color="primary">Salvar</ion-button>
+        <ion-button color="light" (click)="cancel()">Voltar</ion-button>
+    </form>
+
+    <!--AddItemsModal-->
+    <ion-modal trigger="add-item">
+        <ng-template>
+            
+            <ion-header>
+                <ion-toolbar>
+                    <ion-buttons slot="start">
+                        <ion-button (click)="cancelAddItemModal()">Voltar</ion-button>
+                    </ion-buttons>
+                    <ion-title>Novo Item</ion-title>
+                    <ion-buttons slot="end">
+                        <ion-button (click)="addItem()" [strong]="true">Adicionar</ion-button>
+                    </ion-buttons>
+                </ion-toolbar>
+            </ion-header>
+
+            <ion-content class="ion-padding">
+                <ion-item>
+                    <ion-select label="Produto" [(ngModel)]="selectedProduct" interface="popover" label-placement="stacked" (ionChange)="onChangeProductAddItemModal($event)">
+                        <ion-select-option *ngFor="let product of products"
+                            [value]="product.id">{{product.name}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+
+                <ion-item>
+                    <ion-input type="number" label="Quantidade" labelPlacement="stacked" [(ngModel)]="item.quantity"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-input type="number" label="Valor Unitário" labelPlacement="stacked" [(ngModel)]="item.unitPrice"></ion-input>
+                </ion-item>
+            </ion-content>
+
+        </ng-template>
+    </ion-modal>
+    <!--END AddItemsModal-->
+</ion-content>

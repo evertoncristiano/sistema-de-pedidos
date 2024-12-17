@@ -3,20 +3,21 @@ import { HttpService } from './http.service';
 import { BaseService } from './base.service';
 import { BehaviorSubject } from 'rxjs';
 import { Customer } from '../models/customer';
+import { Order } from '../models/order';
 
 @Injectable({ providedIn: 'root' })
-export class CustomersService extends BaseService {
+export class OrdersService extends BaseService {
 
   constructor(httpService: HttpService) {
-    super(httpService, "customers")
+    super(httpService, "orders")
   }
 
-  private customersSource = new BehaviorSubject<Customer[]>([]);
-  customers = this.customersSource.asObservable();
-  getCustomers() {
+  private ordersSource = new BehaviorSubject<Order[]>([]);
+  orders = this.ordersSource.asObservable();
+  getOrders() {
     this.getAll().subscribe({
-      next: (customers: any) => {
-        this.customersSource.next(customers.map((c: any) => { return {...c, address: c.addresses[0]} } ));
+      next: (x: any) => {
+        this.ordersSource.next(x);
       },
       error: (error) => console.log(error)
     });

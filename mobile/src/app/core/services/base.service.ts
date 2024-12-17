@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Entity } from "../entities/entity";
 import { HttpService } from "./http.service";
+import { Model } from "../models/model";
 
 @Injectable({ providedIn: 'root' })
 export abstract class BaseService {
@@ -18,11 +18,11 @@ export abstract class BaseService {
         return this.httpService.getOne(this.path, id);
     }
 
-    save(entity: Entity) {
-        if (entity.id) {
-            return this.httpService.put(this.path, entity.id, entity);
+    save(model: Model) {
+        if (model.id) {
+            return this.httpService.put(this.path, model.id, model);
         } else {
-            return this.httpService.post(this.path, entity);
+            return this.httpService.post(this.path, model);
         }
     }
 }
