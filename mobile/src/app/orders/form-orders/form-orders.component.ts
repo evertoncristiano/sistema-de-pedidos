@@ -154,7 +154,7 @@ export class FormOrdersComponent implements OnInit {
 
     addItem() {
         if (!this.item.product || !this.item.quantity || !this.item.unitPrice)
-            return console.log('Erro ao adicionar um item');
+            this.toastService.show('Erro ao adicionar o item');
 
         var item = this.items.find(x =>
             x.product?.id == this.item.product?.id &&

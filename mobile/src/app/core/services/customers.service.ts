@@ -14,11 +14,8 @@ export class CustomersService extends BaseService {
   private customersSource = new BehaviorSubject<Customer[]>([]);
   customers = this.customersSource.asObservable();
   getCustomers() {
-    this.getAll().subscribe({
-      next: (customers: any) => {
+    this.getAll().subscribe((customers: any) => {
         this.customersSource.next(customers.map((c: any) => { return {...c, address: c.addresses[0]} } ));
-      },
-      error: (error) => console.log(error)
     });
   }
 }

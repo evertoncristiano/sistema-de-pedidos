@@ -15,24 +15,17 @@ export class HttpService {
 
   getOne(path: string, id: string) {
     let url = this.getUrl(path, id)
-    console.log('GET: ', url)
 
     return this.httpClient.get(url, { params: this.getDefaultParams() })
   }
 
   post(path: string, object: object) {
     let url = this.getUrl(path)
-    console.log('POST: ', url);
-    console.log('USING: ', object)
-
     return this.httpClient.post(url, object, { params: this.getDefaultParams() })
   }
 
   put(path: string, id: string, object: object) {
     let url = this.getUrl(path, id)
-    console.log('PUT: ', url);
-    console.log('USING: ', object)
-
     return this.httpClient.put(url, object, { params: this.getDefaultParams() })
   }
 
